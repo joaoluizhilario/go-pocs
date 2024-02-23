@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+  web:
+    build: .
+    ports: 
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app
+    command: air ./cmd/main.go -b 0.0.0.0
+    restart: always
+    depends_on:
+      # - db
+      - crdb
+  crdb:
+    image: cockroachdb/cockroach:latest
+    ports:
+      - "26257:26257"
+      - "8080:8080"
+    command: start-single-node --insecure
+    volumes:
+      - "${PWD}/cockroach-data/crdb:/cockroach/cockroach-data"
+  # db:
+  #   image: postgres:alpine
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - POSTGRES_USER=joaoluizhilario
+  #     - POSTGRES_PASSWORD=joaoluizhilario
+  #     - POSTGRES_DB=gocockroachpoc
+  #   ports: 
+  #     - "5432:5432"
+  #   restart: always
+  #   expose:
+  #     - "5432"
+  #   volumes:
+  #     - "${PWD}/postgres-db:/var/lib/postgresql/data"
+
+volumes:
+  postgres-db:
