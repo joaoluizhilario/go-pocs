@@ -1,11 +1,11 @@
-package main
+package api
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/joaoluizhilario/go-cockroach-poc/database"
+	"github.com/joaoluizhilario/go-cockroach-poc/internal/database"
 )
 
-func main() {
+func InitAPI() {
 	database.ConnectDb()
 
 	app := fiber.New()

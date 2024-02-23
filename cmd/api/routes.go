@@ -1,8 +1,8 @@
-package main
+package api
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/joaoluizhilario/go-cockroach-poc/handlers"
+	"github.com/joaoluizhilario/go-cockroach-poc/internal/handlers"
 )
 
 func setupRoutes(app *fiber.App) {

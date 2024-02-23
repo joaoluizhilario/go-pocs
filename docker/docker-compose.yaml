@@ -8,8 +8,8 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/usr/src/app
-    command: air ./cmd/main.go -b 0.0.0.0
+      - ../:/usr/src/app
+    command: air ./main.go -b 0.0.0.0
     restart: always
     depends_on:
       # - db

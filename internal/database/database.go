@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/joaoluizhilario/go-cockroach-poc/models"
+	"github.com/joaoluizhilario/go-cockroach-poc/internal/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
