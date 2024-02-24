@@ -21,7 +21,7 @@
 # vendor/
 
 # Go workspace file
-docker/cockroachdb-data/
+docker/cockroach-data/
 docker/postgres-db/
 docker/tmp/
 tmp/
