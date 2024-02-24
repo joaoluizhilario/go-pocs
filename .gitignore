@@ -20,7 +20,7 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-# Docker local volumes
+# Go workspace file
 docker/cockroachdb-data/
 docker/postgres-db/
 docker/tmp/
