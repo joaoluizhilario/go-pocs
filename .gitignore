@@ -21,6 +21,7 @@
 # vendor/
 
 # Docker local volumes
-cockroachdb-data/
-postgres-db
-docker/tmp/
+docker/cockroachdb-data/
+docker/postgres-db
+docker/docker/tmp/
+tmp/
