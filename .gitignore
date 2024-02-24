@@ -23,5 +23,5 @@
 # Docker local volumes
 docker/cockroachdb-data/
 docker/postgres-db/
-docker/docker/tmp/
+docker/tmp/
 tmp/
