@@ -8,6 +8,7 @@ import (
 )
 
 type OrderRepository struct {
+	DB *database.CockroachGormService
 }
 
 type OrderRepositoryInterface interface {
@@ -15,14 +16,18 @@ type OrderRepositoryInterface interface {
 	CreateOrder(order *models.Order) (*models.Order, error)
 }
 
+func NewOrderRepository(dbService *database.CockroachGormService) *OrderRepository {
+	return &OrderRepository{DB: dbService}
+}
+
 func (or *OrderRepository) ListOrders() *[]models.Order {
 	orders := []models.Order{}
-	database.DB.Db.Preload("Items").Preload("Items.Product").Find(&orders)
+	or.DB.Db.Preload("Items").Preload("Items.Product").Find(&orders)
 	return &orders
 }
 
 func (or *OrderRepository) CreateOrder(order *models.Order) (*models.Order, error) {
-	tx := database.DB.Db.Begin()
+	tx := or.DB.Db.Begin()
 
 	if tx.Error != nil {
 		return nil, tx.Error

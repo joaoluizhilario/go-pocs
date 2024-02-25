@@ -1,10 +1,14 @@
 package api
 
 import (
+	"context"
+	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 	_ "github.com/joaoluizhilario/go-cockroach-poc/docs"
-	"github.com/joaoluizhilario/go-cockroach-poc/internal/database"
+	"github.com/joaoluizhilario/go-cockroach-poc/internal/handlers"
 	fiberSwagger "github.com/swaggo/fiber-swagger"
+	"go.uber.org/fx"
 )
 
 //	@title			Supermarket API
@@ -22,15 +26,29 @@ import (
 // @host		localhost:3000
 // @BasePath	/
 // @schemes	http
-
-func InitAPI() {
-	database.ConnectDb()
+func NewFiberAPI(lc fx.Lifecycle, productAPIHandler *handlers.ProductAPIHandler, orderAPIHandler *handlers.OrderAPIHandler) *fiber.App {
 
 	app := fiber.New()
 
 	app.Get("/swagger/*", fiberSwagger.WrapHandler)
 
-	setupRoutes(app)
+	app.Get("/product", productAPIHandler.ListProducts)
+	app.Post("/product", productAPIHandler.CreateProduct)
+	app.Get("/order", orderAPIHandler.ListOrders)
+	app.Post("/order", orderAPIHandler.CreateOrder)
 
 	app.Listen(":3000")
+
+	lc.Append(fx.Hook{
+		OnStart: func(context.Context) error {
+			fmt.Println("Runnig fiber server over fx on 8080")
+			go app.Listen(":8080")
+			return nil
+		},
+		OnStop: func(ctx context.Context) error {
+			return app.Shutdown()
+		},
+	})
+
+	return app
 }

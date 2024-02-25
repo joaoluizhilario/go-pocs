@@ -7,7 +7,13 @@ import (
 )
 
 type ProductAPIHandler struct {
-	Repository repositories.ProductRepositoryInterface
+	Repository *repositories.ProductRepository
+}
+
+func NewProductAPIHandler(repository *repositories.ProductRepository) *ProductAPIHandler {
+	return &ProductAPIHandler{
+		Repository: repository,
+	}
 }
 
 // GetProducts ... Get all products

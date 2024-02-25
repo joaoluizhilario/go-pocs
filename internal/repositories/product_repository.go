@@ -10,14 +10,20 @@ type ProductRepositoryInterface interface {
 	CreateProduct(product *models.Product)
 }
 
-type ProductRepository struct{}
+type ProductRepository struct {
+	DB *database.CockroachGormService
+}
+
+func NewProductRepository(dbService *database.CockroachGormService) *ProductRepository {
+	return &ProductRepository{DB: dbService}
+}
 
 func (pr *ProductRepository) ListProducts() *[]models.Product {
 	products := []models.Product{}
-	database.DB.Db.Find(&products)
+	pr.DB.Db.Find(&products)
 	return &products
 }
 
 func (pr *ProductRepository) CreateProduct(product *models.Product) {
-	database.DB.Db.Create(&product)
+	pr.DB.Db.Create(&product)
 }

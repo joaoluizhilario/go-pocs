@@ -7,7 +7,13 @@ import (
 )
 
 type OrderAPIHandler struct {
-	Repository repositories.OrderRepositoryInterface
+	Repository *repositories.OrderRepository
+}
+
+func NewOrderAPIHandler(repository *repositories.OrderRepository) *OrderAPIHandler {
+	return &OrderAPIHandler{
+		Repository: repository,
+	}
 }
 
 // CreateOrder ... Create Order
