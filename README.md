@@ -3,6 +3,7 @@ Project for studies of docker, golang and benchmarks of relational database perf
 
 ### Choosing Better API Framework by performance benchmarks
 - https://www.youtube.com/watch?v=9roVXcwaZ3M
+- https://www.youtube.com/watch?v=Tppz2dDGXGk&t=2s
 
 ### Study references
 - https://divrhino.com/articles/rest-api-docker-go-fiber-from-scratch/

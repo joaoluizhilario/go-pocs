@@ -7,7 +7,7 @@ import (
 )
 
 type OrderAPIHandler struct {
-	Repository *repositories.OrderRepository
+	Repository repositories.OrderRepositoryInterface
 }
 
 func NewOrderAPIHandler(repository *repositories.OrderRepository) *OrderAPIHandler {

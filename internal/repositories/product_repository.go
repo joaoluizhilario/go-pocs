@@ -14,10 +14,6 @@ type ProductRepository struct {
 	DB *database.CockroachGormService
 }
 
-func NewProductRepository(dbService *database.CockroachGormService) *ProductRepository {
-	return &ProductRepository{DB: dbService}
-}
-
 func (pr *ProductRepository) ListProducts() *[]models.Product {
 	products := []models.Product{}
 	pr.DB.Db.Find(&products)
@@ -26,4 +22,8 @@ func (pr *ProductRepository) ListProducts() *[]models.Product {
 
 func (pr *ProductRepository) CreateProduct(product *models.Product) {
 	pr.DB.Db.Create(&product)
+}
+
+func NewProductRepository(dbService *database.CockroachGormService) *ProductRepository {
+	return &ProductRepository{DB: dbService}
 }

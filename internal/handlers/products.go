@@ -7,7 +7,7 @@ import (
 )
 
 type ProductAPIHandler struct {
-	Repository *repositories.ProductRepository
+	Repository repositories.ProductRepositoryInterface
 }
 
 func NewProductAPIHandler(repository *repositories.ProductRepository) *ProductAPIHandler {
